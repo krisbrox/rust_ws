@@ -1,5 +1,6 @@
-use calc::cli::Cli;
 use calc::calculator::Calculator;
+use calc::cli::Cli;
+use calc::expression::Expression;
 
 fn main() {
     let mut args: Vec<String> = vec![];
@@ -18,8 +19,14 @@ fn main() {
         }
     };
 
-    let calculator = Calculator::from(&data.args);
-    let res = calculator.calculate();
-    
-    println!("{}", res)
+    let expression_res = Expression::from(data.args.as_str());
+    match expression_res {
+        Ok(expr) => {
+            let output = Calculator::calculate(expr);
+            println!("{}", output);
+        }
+        Err(msg) => {
+            println!("{}", msg)
+        }
+    }
 }

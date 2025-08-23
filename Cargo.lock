@@ -9,9 +9,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 
 [[package]]
+name = "binary-tree"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "195cfe2d570126f76b787500267993411a6b5fbf880bef38369682530ed909b4"
+
+[[package]]
 name = "calc"
 version = "0.1.0"
 dependencies = [
+ "binary-tree",
  "num-rational",
 ]
 

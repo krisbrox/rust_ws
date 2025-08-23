@@ -1,0 +1,7 @@
+#force_multiline_blocks = true
+newline_style = "Unix"
+#error_on_unformatted = true
+max_width = 120
+#imports_granularity="Crate"
+reorder_imports=true
+#yew.html_width=80

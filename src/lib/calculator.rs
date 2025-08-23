@@ -1,4 +1,4 @@
-struct Calculator {
+pub struct Calculator {
     
 }
 

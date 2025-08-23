@@ -6,8 +6,8 @@ pub struct Calculator {
 }
 
 impl Calculator {
-    pub fn from(args: &[String]) -> Self {
-        println!("{:?}", args);
+    pub fn from(arg: &str) -> Self {
+        println!("calculating: {:?}", arg);
 
         todo!()
     }

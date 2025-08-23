@@ -6,7 +6,7 @@ pub struct Calculator {
 }
 
 impl Calculator {
-    pub fn from(args: &[String]) {
+    pub fn from(args: &[String]) -> Self {
         println!("{:?}", args);
 
         todo!()

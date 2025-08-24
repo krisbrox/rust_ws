@@ -1,5 +1,5 @@
-use crate::syntax::{Node, SyntaxTree};
-use crate::token::{Token, Values};
+use crate::example::syntax::{Node, SyntaxTree};
+use crate::example::token::{Token, Values};
 use std::fmt::{Display, Formatter};
 
 #[derive(Debug)]
@@ -17,20 +17,16 @@ impl Expression {
         let res = expr.apply(args);
 
         match res {
-            Ok((expression, _)) => {
-                println!("{}", expression);
-                Ok(expression)
-            }
-
+            Ok((expression, _)) => Ok(expression),
             Err(msg) => Err(msg),
         }
     }
 
-    pub fn evaluate(self) -> Values {
+    pub fn evaluate(self) -> String {
         let tree = self.syntax_tree;
         let root = tree.get(tree.root.unwrap()).unwrap();
 
-        Self::evaluate_inner(root, &tree).to_owned()
+        Self::evaluate_inner(root, &tree).to_owned().to_string()
     }
 
     fn evaluate_inner(node: &Node, tree: &SyntaxTree<Token>) -> Values {

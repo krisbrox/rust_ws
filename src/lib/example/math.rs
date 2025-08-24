@@ -1,4 +1,4 @@
-use crate::token::{BinaryOperators, Values};
+use crate::example::token::{BinaryOperators, Values};
 
 pub trait BinaryOperator<E> {
     fn apply(&self, left_operand: E, right_operand: E) -> E;
@@ -38,13 +38,6 @@ impl BinaryOperators {
 
 #[derive(Clone, Debug, Copy)]
 pub struct Addition;
-impl Addition {
-    pub fn add_ints(left: Int, right: Int) -> Int {
-        let Int(left) = left;
-        let Int(right) = right;
-        Int(left + right)
-    }
-}
 
 #[derive(Clone, Debug, Copy)]
 pub struct Subtraction;

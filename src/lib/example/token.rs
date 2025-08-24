@@ -1,7 +1,7 @@
-use crate::math::{Addition, Division, Float, Int, Multiplication, Subtraction};
-use crate::token::BinaryOperators::{DivideBy, Minus, Plus, Times};
-use crate::token::Token::{Operator, Val};
-use crate::token::Values::{FloatingPoint, Integer};
+use crate::example::math::{Addition, Division, Float, Int, Multiplication, Subtraction};
+use crate::example::token::BinaryOperators::{DivideBy, Minus, Plus, Times};
+use crate::example::token::Token::{Operator, Val};
+use crate::example::token::Values::{FloatingPoint, Integer};
 use std::fmt::{Display, Formatter};
 use std::str::FromStr;
 

@@ -1,4 +1,4 @@
-use crate::token::Token;
+use crate::example::token::Token;
 use std::marker::PhantomData;
 
 #[derive(Debug, Clone)]

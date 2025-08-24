@@ -1,6 +1,5 @@
 use calc::calculator::Calculator;
 use calc::cli::Cli;
-use calc::expression::Expression;
 
 fn main() {
     let mut args: Vec<String> = vec![];
@@ -18,15 +17,6 @@ fn main() {
             return;
         }
     };
-
-    let expression_res = Expression::from(data.args.as_str());
-    match expression_res {
-        Ok(expr) => {
-            let output = Calculator::calculate(expr);
-            println!("\nExpression evaluated to: {}\n", output);
-        }
-        Err(msg) => {
-            println!("\n{}\n", msg)
-        }
-    }
+    let output = Calculator::calculate(data.args.as_str());
+    println!("\nExpression evaluated to: {}\n", output);
 }

@@ -25,7 +25,7 @@ impl Cli {
             "usage: this calculator should be called with a single string argument.\n\
             The argument should be a string containing the expression you want to calculate.\n\
             The argument string should be in a supported syntactic format,\n\
-            e.g. infix \"(2 + 3)\", polish \"+ 2 3\" etc.\n\n\
+            e.g. infix \"(2 + 3)\", prefix \"+ 2 3\" etc.\n\n\
             example: \n   $ {} \"+ 3 4\" \n-> $ 7", arg0
         )
     }

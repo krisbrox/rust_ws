@@ -1,5 +1,7 @@
+use std::fmt::Display;
 use std::marker::PhantomData;
 
+#[derive(Debug, Clone)]
 pub struct SyntaxTree<T>
 where
     T: 'static,
@@ -26,13 +28,10 @@ impl<T> SyntaxTree<T> {
         self.root = Some(0);
     }
 
-    pub fn insert(mut self, val: T, parent: usize, left: bool) -> usize {
+    pub fn insert(&mut self, val: T, parent: usize, left: bool) -> usize {
         let idx = self.nodes.len();
         let mut node = Node::new(val);
         node.parent = Some(parent);
-
-        self.nodes.push(node);
-
         let parent = &mut self.nodes[parent];
         if left {
             parent.left = Some(idx);
@@ -40,7 +39,16 @@ impl<T> SyntaxTree<T> {
             parent.right = Some(idx);
         }
 
+        self.nodes.push(node);
         idx
+    }
+
+    pub fn last_idx(&self) -> usize {
+        self.nodes.len() - 1
+    }
+
+    pub fn get(&self, idx: usize) -> Option<&Node<T>> {
+        self.nodes.get(idx)
     }
 
     pub fn is_empty(&self) -> bool {
@@ -48,6 +56,7 @@ impl<T> SyntaxTree<T> {
     }
 }
 
+#[derive(Debug, Clone)]
 pub struct Node<T>
 where
     T: 'static,
@@ -69,9 +78,5 @@ impl<T> Node<T> {
             left: None,
             right: None,
         }
-    }
-
-    pub fn get_parent(&self) -> Option<usize> {
-        self.parent
     }
 }

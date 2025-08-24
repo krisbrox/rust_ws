@@ -5,6 +5,7 @@ use num_rational::Rational64;
 use std::fmt::{Display, Formatter};
 use std::str::FromStr;
 
+#[derive(Clone, Debug)]
 pub enum Token {
     Operator(BinaryOperator),
     Val(Value),
@@ -26,6 +27,7 @@ impl Token {
     }
 }
 
+#[derive(Clone, Debug)]
 pub enum BinaryOperator {
     Plus,
     Minus,
@@ -33,10 +35,20 @@ pub enum BinaryOperator {
     DivideBy,
 }
 
+#[derive(Clone, Debug)]
 pub enum Value {
     Integer(i64),
     Rational(Rational64),
     Float(f64),
+}
+
+impl Display for Token {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Operator(op) => op.fmt(f),
+            Val(val) => val.fmt(f),
+        }
+    }
 }
 
 impl Display for BinaryOperator {

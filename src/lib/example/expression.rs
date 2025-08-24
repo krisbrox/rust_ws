@@ -171,7 +171,7 @@ impl Display for Node<Token> {
 
 #[cfg(test)]
 mod test {
-    use crate::expression::Expression;
+    use crate::example::expression::Expression;
 
     #[test]
     fn simple() {

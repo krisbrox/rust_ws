@@ -1,8 +1,8 @@
-use std::fmt::Display;
+use crate::token::Token;
 use std::marker::PhantomData;
 
 #[derive(Debug, Clone)]
-pub struct SyntaxTree<T>
+pub struct SyntaxTree<T = Token>
 where
     T: 'static,
     Node<T>: 'static,
@@ -57,7 +57,7 @@ impl<T> SyntaxTree<T> {
 }
 
 #[derive(Debug, Clone)]
-pub struct Node<T>
+pub struct Node<T = Token>
 where
     T: 'static,
 {

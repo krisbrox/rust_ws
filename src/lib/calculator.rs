@@ -1,10 +1,10 @@
 use crate::expression::Expression;
-use crate::token::Value;
+use crate::token::Values;
 
 pub struct Calculator {}
 
 impl Calculator {
-    pub fn calculate(expression: Expression) -> Value {
+    pub fn calculate(expression: Expression) -> Values {
         expression.evaluate()
     }
 }

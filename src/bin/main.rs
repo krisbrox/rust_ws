@@ -23,10 +23,10 @@ fn main() {
     match expression_res {
         Ok(expr) => {
             let output = Calculator::calculate(expr);
-            println!("{}", output);
+            println!("\nExpression evaluated to: {}\n", output);
         }
         Err(msg) => {
-            println!("{}", msg)
+            println!("\n{}\n", msg)
         }
     }
 }

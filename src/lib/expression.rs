@@ -1,5 +1,5 @@
 use crate::syntax::{Node, SyntaxTree};
-use crate::token::{Token, Value};
+use crate::token::{Token, Values};
 use std::fmt::{Display, Formatter};
 
 #[derive(Debug)]
@@ -26,8 +26,48 @@ impl Expression {
         }
     }
 
-    pub fn evaluate(&self) -> Value {
-        todo!()
+    pub fn evaluate(self) -> Values {
+        let tree = self.syntax_tree;
+        let root = tree.get(tree.root.unwrap()).unwrap();
+
+        Self::evaluate_inner(root, &tree).to_owned()
+    }
+
+    fn evaluate_inner(node: &Node, tree: &SyntaxTree<Token>) -> Values {
+        match node.value {
+            Token::Val(value) => value,
+            Token::Operator(op) => {
+                // TODO handle Unary operators
+                let left_node_idx = node.left.expect(
+                    format!("invalid syntax tree: missing left child for {}", node.value).as_str(),
+                );
+                let left_node = tree.get(left_node_idx).expect(
+                    format!(
+                        "invalid syntax tree: missing left child node for {} at idx {}",
+                        node.value, left_node_idx
+                    )
+                    .as_str(),
+                );
+
+                let right_node_idx = node.right.expect(
+                    format!(
+                        "invalid syntax tree: missing right child for {}",
+                        node.value
+                    )
+                    .as_str(),
+                );
+                let right_node = tree.get(right_node_idx).expect(
+                    format!(
+                        "invalid syntax tree: missing right child node for {} at idx {}",
+                        node.value, right_node_idx
+                    )
+                    .as_str(),
+                );
+                let left_val = Self::evaluate_inner(left_node, tree);
+                let right_val = Self::evaluate_inner(right_node, tree);
+                op.apply(left_val, right_val)
+            }
+        }
     }
 
     fn apply(self, rest: Vec<&str>) -> Result<(Self, Vec<&str>), String> {
@@ -36,8 +76,6 @@ impl Expression {
         match next {
             None => Ok((self, vec![])),
             Some(next) => {
-                println!("applying {}", next); // TODO testing
-
                 let mut tree = self.syntax_tree;
                 let token =
                     Token::from_str(*next).expect(format!("Failed to parse {}", *next).as_str());
@@ -53,7 +91,7 @@ impl Expression {
                     let previous_idx = tree.last_idx();
                     match Self::insert(&mut tree, &token, previous_idx) {
                         None => {
-                            return Err(format!("Failed to insert {:?} into {:?}", token, tree));
+                            return Err(format!("Failed to insert {} into {:?}", token, tree));
                         }
                         Some(_) => {}
                     }
